@@ -2,11 +2,10 @@ const Ticket = require("../models/Ticket");
 
 exports.createTickets = async function (req, res) {
     let userId = req.loggedInUserId;
-    let numberOfTickets = parseInt(req.query.numberOfTickets) || 1;
+    let numberOfTickets = parseInt(req.query.numberOfTickets) || 6;
     let ticketsArray = await Ticket.generateTambolaTicket(numberOfTickets);
-    let tickets = ticketsArray.map(
-        (ticket) => new Ticket(userId, ticket._entries)
-    );
+
+    let tickets = ticketsArray.map((ticket) => new Ticket(userId, ticket));
     let ticketPromises = [];
     for (let ticket of tickets) {
         ticketPromises.push(ticket.save());

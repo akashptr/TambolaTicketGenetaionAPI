@@ -1,6 +1,5 @@
 const ticketCollection = require("../db").collection("Tickets");
-const { default: Tambola } = require("tambola-generator");
-const tambola = require("tambola-generator");
+const ticketGenerator = require("./TambolaTicketGenerator");
 
 let Ticket = function (userId, data) {
     this.userId = userId;
@@ -51,11 +50,18 @@ Ticket.fetch = function (uId, page, limit) {
     });
 };
 
-Ticket.generateTambolaTicket = function (numberOfTickets = 1) {
+Ticket.generateTambolaTicket = function (numberOfTickets = 6) {
     return new Promise(async (resolve, reject) => {
         try {
-            let tickets = Tambola.generateTickets(numberOfTickets);
-            //  = tambola.getTickets(numberOfTickets);
+            let numberOfSets = Math.floor(numberOfTickets / 6);
+            let remainingTickets = numberOfTickets % 6;
+            let tickets = [];
+            for (let i = 0; i < numberOfSets; i++) {
+                tickets = tickets.concat(ticketGenerator());
+            }
+            tickets = tickets.concat(
+                ticketGenerator().splice(0, remainingTickets)
+            );
             resolve(tickets);
         } catch (err) {
             reject(err);
