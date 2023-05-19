@@ -11,7 +11,7 @@ To install and run this project, follow these steps:
 2. npm install
 3. npm run watch
 
-### Create User
+## Create User
 
 To create a new user, send a `POST` request to `/signup` with the following JSON body:
 
@@ -22,7 +22,7 @@ To create a new user, send a `POST` request to `/signup` with the following JSON
 }
 ```
 
-### Login
+## Login
 
 To log in, send a `POST` request to `/login` with the following JSON body:
 
@@ -35,7 +35,7 @@ To log in, send a `POST` request to `/login` with the following JSON body:
 
 It will return a JWT token as a response to the successful login.
 
-### Create Tickets
+## Create Tickets
 
 To create tickets, send a `POST` request to `/createticket?numberOfTickets=<number of tickets>` with the following headers:
 
@@ -43,9 +43,9 @@ To create tickets, send a `POST` request to `/createticket?numberOfTickets=<numb
 { "Authorization": "Bearer <token>" }
 ```
 
-### Fetch Tickets
+## Fetch Tickets
 
-To fetch tickets, send a `POST` request to `/fetchticket?page=<page number>&limit=<number of items per page>` with the following headers:
+To fetch tickets, send a `GET` request to `/fetchticket?page=<page number>&limit=<number of items per page>` with the following headers:
 
 ```json
 { "Authorization": "Bearer <token>" }
